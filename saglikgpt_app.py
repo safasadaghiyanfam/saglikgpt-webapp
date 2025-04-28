@@ -15,7 +15,7 @@ OPENROUTER_API_KEY = st.secrets["OPENROUTER_API_KEY"]
 def sadeleştir_openrouter(metin):
     headers = {
         "Authorization": f"Bearer {OPENROUTER_API_KEY}",
-        "HTTP-Referer": "https://yourdomain.com",  # Burayı bir URL yapman lazım (örnek: https://streamlit.io)
+        "HTTP-Referer": "https://streamlit.io",  # Burayı bir URL yapman lazım (örnek: https://streamlit.io)
         "X-Title": "SaglikGPT",
         "Content-Type": "application/json"
     }
