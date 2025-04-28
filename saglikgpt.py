@@ -15,11 +15,13 @@ OPENROUTER_API_KEY = st.secrets["OPENROUTER_API_KEY"]
 def sadeleştir_openrouter(metin):
     headers = {
         "Authorization": f"Bearer {OPENROUTER_API_KEY}",
+        "HTTP-Referer": "https://streamlit.io",  # önemli!
+        "X-Title": "SaglikGPT",                 # önemli!
         "Content-Type": "application/json"
     }
 
     data = {
-        "model": "openai/gpt-3.5-turbo",   # Aynı model, sadece prompt değişti
+        "model": "openai/gpt-3.5-turbo",
         "messages": [
             {"role": "system", "content": "Sen bir tıbbi sadeleştirme asistanısın."},
             {"role": "user", "content": f"Verilen tıbbi metni hasta yakınına anlatır gibi Türkçe, açık ve sade bir dille açıkla. Tanı koyma, tedavi önerme.\n\nMetin:\n{metin}\n\nAçıklama:"}
