@@ -15,13 +15,15 @@ OPENROUTER_API_KEY = st.secrets["OPENROUTER_API_KEY"]
 def sadeleştir_openrouter(metin):
     headers = {
         "Authorization": f"Bearer {OPENROUTER_API_KEY}",
-        "HTTP-Referer": "https://streamlit.io",  # önemli!
-        "X-Title": "SaglikGPT",                 # önemli!
+        "HTTP-Referer": "https://yourdomain.com",  # Burayı bir URL yapman lazım (örnek: https://streamlit.io)
+        "X-Title": "SaglikGPT",
         "Content-Type": "application/json"
     }
 
+    url = "https://openrouter.ai/api/v1/chat/completions"
+
     data = {
-        "model": "openai/gpt-3.5-turbo",
+        "model": "openrouter/openai/gpt-3.5-turbo",
         "messages": [
             {"role": "system", "content": "Sen bir tıbbi sadeleştirme asistanısın."},
             {"role": "user", "content": f"Verilen tıbbi metni hasta yakınına anlatır gibi Türkçe, açık ve sade bir dille açıkla. Tanı koyma, tedavi önerme.\n\nMetin:\n{metin}\n\nAçıklama:"}
@@ -30,10 +32,10 @@ def sadeleştir_openrouter(metin):
         "max_tokens": 600
     }
 
-    response = requests.post("https://openrouter.ai/api/v1/chat/completions", headers=headers, json=data)
+    response = requests.post(url, headers=headers, json=data)
 
     if response.status_code == 200:
-        return response.json()['choices'][0]['message']['content']
+        return response.json()["choices"][0]["message"]["content"]
     else:
         return f"Error: {response.text}"
 
