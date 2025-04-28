@@ -10,7 +10,8 @@ Original file is located at
 import streamlit as st
 import requests
 
-OPENROUTER_API_KEY = "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"
+
+OPENROUTER_API_KEY = st.secrets["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"]
 
 def sadeleştir_openrouter(metin):
     headers = {
